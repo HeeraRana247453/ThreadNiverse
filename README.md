@@ -1,4 +1,4 @@
-# ThreadHub - PHP Discussion Forum Platform
+# ThreadNiverse - PHP Discussion Forum Platform
 
 A modern, responsive PHP-based discussion forum platform that enables users to create, manage, and participate in threaded conversations across various topics.
 
@@ -76,7 +76,7 @@ Project-4_Thread_Final_InfinityFree/
 
 1. **Clone the repository**
    ```bash
-   git clone [repository-url]
+   git clone https://github.com/HeeraRana247453/ThreadNiverse.git
    cd Project-4_Thread_Final_InfinityFree
    ```
 
@@ -498,4 +498,4 @@ For support, email threadniverse@gmail.com or join our Slack channel.
 
 ---
 
-**ThreadHub** - Empowering communities through meaningful discussions
+**ThreadNiverse** - Empowering communities through meaningful discussions
