@@ -114,7 +114,7 @@ Project-4_Thread_Final_InfinityFree/
 
 1. **Clone the repository**
    ```bash
-   git clone [repository-url]
+   git clone https://github.com/HeeraRana247453/ThreadNiverse.git
    cd Project-4_Thread_Final_InfinityFree
    ```
 
