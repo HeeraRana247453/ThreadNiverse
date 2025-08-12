@@ -97,28 +97,35 @@ $userid = $_GET['user_id'];
 
 <!-- LOWER PART IN CENTER LAYOUT
  ============================================ -->
-            <div class="lowerpart">
-                <h2>About</h2>
-                <?php
-                // Check if the user is logged in and matches the current user
-                if (isset($_SESSION['loggedin']) && $userid == $_SESSION['curr_user_id']) {
-                    // Display the about content and the Edit button
-                    echo '<p class="aboutcontent" id="aboutContent">' . $row1['aboutuser'] . '</p>';
-                    echo '<p class="editbutton">
-                            <button id="editAboutBtn" class="btn btn-outline-primary rounded-5 px-2 py-1" onclick="enableEditAbout()">
-                                <img width="23px" src="images/editicon.png"> Edit
-                            </button>
-                        </p>';
+                <div class="lowerpart">
+                    <h2>About</h2>
+                    <?php
+                    // Set default about text if empty
+                    $aboutuser = !empty($row1['aboutuser']) 
+                        ? $row1['aboutuser'] 
+                        : "I am a dynamic and creative individual, always seeking new experiences and knowledge. I possess a positive attitude, focusing on the good in every situation. As a good communicator, I excel in interpersonal relationships and am attentive to the needs of others. My creative nature enables me to recognize and fill gaps in groups or projects. I am proud of my uniqueness, acknowledging both strengths and weaknesses. With a passion for learning and exploration, I am constantly evolving and adapting to new challenges.";
 
-                    // Form to submit the updated content (hidden initially)   //I have spent more than 6 hours in this problem due to action="'.$_SERVER['PHP_SELF'].'?user_id='.$userid.'"
-                    echo '<form action="' . $_SERVER['PHP_SELF'] .'?user_id='.$userid.'" method="POST" id="editForm" style="display:none;"> 
-                            <textarea id="aboutTextarea" name="aboutuserupdate" rows="5" class="form-control" maxlength="600">' . $row1['aboutuser'] . '</textarea>
-                            <button type="submit" name="save" class="btn btn-success mt-2">Save</button>
-                        </form>';
-                } else {
-                    // If the user is not logged in or is viewing someone else's profile, just display the content
-                    echo '<p class="aboutcontent">' . $row1['aboutuser'] . '</p>';
-                }
+                    // Check if the user is logged in and matches the current user
+                    if (isset($_SESSION['loggedin']) && $userid == $_SESSION['curr_user_id']) {
+                        // Display the about content and the Edit button
+                        echo '<p class="aboutcontent" id="aboutContent">' . $aboutuser . '</p>';
+                        echo '<p class="editbutton">
+                                <button id="editAboutBtn" class="btn btn-outline-primary rounded-5 px-2 py-1" onclick="enableEditAbout()">
+                                    <img width="23px" src="images/editicon.png"> Edit
+                                </button>
+                            </p>';
+
+                        // Form to submit the updated content (hidden initially)
+                        echo '<form action="' . $_SERVER['PHP_SELF'] .'?user_id='.$userid.'" method="POST" id="editForm" style="display:none;"> 
+                                <textarea id="aboutTextarea" name="aboutuserupdate" rows="5" class="form-control" maxlength="600">' . $aboutuser . '</textarea>
+                                <button type="submit" name="save" class="btn btn-success mt-2">Save</button>
+                            </form>';
+                    } else {
+                        // If the user is not logged in or is viewing someone else's profile
+                        echo '<p class="aboutcontent">' . $aboutuser . '</p>';
+                    }
+                    ?>
+                </div>
 
 
                 // HANDLING EDIT ABOUT CONTENT PHP FORM SUBMISSION

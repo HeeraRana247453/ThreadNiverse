@@ -59,7 +59,7 @@
                 <form class="d-flex" action="components/logout.php" method="POST" class="d-flex">
                         <a href="searchPage.php?search="><img width="38px" class="mr-3" style="transform: scaleX(-1);" src="images/3d-magnifier.png"></a>
                     <?php
-                        session_start();
+                        // session_start();
                         if(!isset($_SESSION['loggedin']))
                         {
                         echo'<button data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-outline-primary mx-2" type="button">Login</button>

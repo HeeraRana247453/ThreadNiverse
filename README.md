@@ -216,6 +216,46 @@ COPY . /var/www/html/
 EXPOSE 80
 ```
 
+### How to Run the Project in Docker Container
+
+1. Build the Docker image:
+
+```bash
+docker build -t threadhub-forum .
+```
+
+2. Run the Docker container:
+
+```bash
+docker run -d -p 8080:80 --name threadhub-container threadhub-forum
+```
+
+3. Access the application in your browser at:
+
+```
+http://localhost:8080
+```
+
+4. To stop the container:
+
+```bash
+docker stop threadhub-container
+```
+
+5. To remove the container:
+
+```bash
+docker rm threadhub-container
+```
+
+Make sure your database is accessible to the container, either by running a separate MySQL container or connecting to an external database. Update your database credentials accordingly in the configuration files.
+docker rm threadhub-container
+3. Access the application in your browser at:
+
+docker run -d -p 8080:80 --name threadhub-container threadhub-forum
+docker build -t threadhub-forum .
+EXPOSE 80
+
 ## 🤝 Contributing
 
 1. Fork the repository
