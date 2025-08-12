@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    scrollbar-width: thin;
+}
+
+body {
+    background-color: #fdf6f6;
+}
+
+
+
+/* Hero section */
+.about-story {
+    text-align: center;
+    margin: 1.8rem 1.5rem 1.5rem 1.5rem;
+    padding: 50px;
+    /* background-color: rgba(255, 192, 203, 0.432); */
+    background-color: rgba(144, 238, 144, 0.301);
+
+    border-radius: 1.5rem;
+}
+
+.about-story h1 {
+    font-size: 36px;
+    /* color: #fc6f6f; */
+    color: green;
+}
+
+.about-story .description {
+    font-size: 18px;
+    margin-bottom: 50px;
+    color: #666;
+}
+
+.team {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.team-member {
+    text-align: center;
+    max-width: 300px;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.team-member h2 {
+    font-size: 22px;
+    color: #333;
+}
+
+.team-member p {
+    color: #777;
+}
+
+.why-we-started {
+    background-color: #fff;
+    padding: 50px;
+    text-align: center;
+}
+
+.why-we-started h2 {
+    font-size: 32px;
+    color: #fc6f6f;
+}
+
+.why-we-started p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #333;
+}
+@media  (min-width: 395px) and (max-width:576px) {
+    .about-story{
+        margin: 1rem 0.5rem 0.5rem 0.5rem;
+        padding: 25px;
+    }
+    .about-story .team{
+        gap: 30px;
+    }
+
+    .about-story p {
+        font-size: 1rem;
+    }
+}
+@media  (max-width: 394px) {
+    .about-story{
+        margin: 1rem 0.5rem 0.5rem 0.5rem;
+        padding: 15px;
+    }
+    .about-story .team{
+        gap: 30px;
+    }
+
+    .about-story p {
+        font-size: 1rem;
+    }
+}
+
+/* Why we started */
+.why-we-started h2{
+    color: green;
+}
+
+
+
+/* continue-about-story section */
+.continue-about-story {
+    background-color: #f9f9f9;
+    color: #343a40;
+    padding: 50px 0;
+    font-family: 'Lora', serif; /* Elegant font style */
+}
+
+.continue-about-story h2 {
+    font-size: 2.4rem;
+    font-weight: bold;
+    /* color: #007bff; */
+    color: green;
+    margin-bottom: 30px;
+    font-family: 'Merriweather', serif; /* Different font for headings */
+}
+
+.continue-about-story p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #495057;
+}
+
+.continue-about-story .content-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.continue-about-story img {
+    max-width: 40%;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.continue-about-story img.float-left {
+    float: left;
+    margin-right: 20px;
+}
+
+.continue-about-story img.float-right {
+    float: right;
+    margin-left: 20px;
+}
+
+.continue-about-story .container {
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Clear floating images for proper text alignment on small screens */
+@media (max-width: 768px) {
+    .continue-about-story img {
+        max-width: 100%;
+        float: none;
+        margin: 20px 0;
+    }
+    .continue-about-story p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .continue-about-story h2 {
+        font-size: 1.8rem;
+    }
+
+    .continue-about-story p {
+        font-size: 1rem;
+    }
+}
+
+
+
+
+/* footer */
+footer {
+    height: auto;
+    background-color: black;
+    color: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap:wrap-reverse;
+}
+
+.foot1,
+.foot2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+footer a {
+    margin: 5px;
+    text-decoration: none;
+}
+
+.foot3 {
+    padding: 9px;
+}
+
+/* media Query for cards in mobile */
+@media screen and (max-width:922px) {
+    .col {
+        /* border: 2px solid red; */
+        margin: 25px 5px;
+        width: 22rem;
+    }
+}
