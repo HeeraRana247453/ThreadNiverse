@@ -68,8 +68,11 @@ Project-4_Thread_Final_InfinityFree/
 - MySQL 5.7 or higher
 - Apache/Nginx web server
 - Composer (for dependency management)
+- Docker & Docker Compose (optional, for containerized setup)
 
 ### Installation
+
+#### Option 1: Local Development Setup
 
 1. **Clone the repository**
    ```bash
@@ -82,31 +85,52 @@ Project-4_Thread_Final_InfinityFree/
    composer install
    ```
 
-3. **Database Setup**
-   - Create a MySQL database named `threadhub`
-   - Import the SQL schema (provided in `database/schema.sql`)
-   - Update database credentials in `components/_dbconnect.php`
-
-4. **Configuration**
-   - Copy `config.example.php` to `config.php`
-   - Update configuration values:
-     ```php
-     define('DB_HOST', 'localhost');
-     define('DB_USER', 'your_username');
-     define('DB_PASS', 'your_password');
-     define('DB_NAME', 'threadhub');
+3. **Environment Configuration**
+   - Copy `.env.example` to `.env` (or create `.env` file)
+   - Update the environment variables in `.env` file:
+     ```env
+     DB_HOST=localhost
+     DB_NAME=threadhub
+     DB_USER=root
+     DB_PASS=your_database_password
+     SMTP_HOST=smtp.gmail.com
+     SMTP_USER=your-email@gmail.com
+     SMTP_PASS=your-app-password
      ```
 
-5. **Email Configuration**
-   - Update SMTP settings in `contactSMTP.php`
-   - Configure email credentials for contact forms
+4. **Database Setup**
+   - Create a MySQL database named `threadhub`
+   - Import the SQL schema (provided in `database/schema.sql`)
+   - The application will automatically use the environment variables from `.env`
 
-6. **File Permissions**
+5. **File Permissions**
    ```bash
    chmod 755 -R .
    chmod 644 *.php
-   chmod 600 config.php
+   chmod 600 .env
    ```
+
+#### Option 2: Docker Setup (Recommended)
+
+1. **Clone the repository**
+   ```bash
+   git clone [repository-url]
+   cd Project-4_Thread_Final_InfinityFree
+   ```
+
+2. **Start with Docker Compose**
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **Access the application**
+   - Main application: http://localhost:8080
+   - PHPMyAdmin: http://localhost:8081
+   - Database credentials are pre-configured in docker-compose.yml
+
+4. **Environment Variables**
+   - Docker environment variables are set in `docker-compose.yml`
+   - For custom configuration, update the environment section in docker-compose.yml
 
 ### Database Schema
 
@@ -121,18 +145,41 @@ Key tables:
 
 ### Environment Variables
 
-Create a `.env` file in the root directory:
+The application uses environment variables for configuration. Create a `.env` file in the root directory:
 
 ```env
+# Database Configuration
 DB_HOST=localhost
 DB_NAME=threadhub
 DB_USER=root
-DB_PASS=password
+DB_PASS=your_database_password
+
+# SMTP Configuration
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your-email@gmail.com
 SMTP_PASS=your-app-password
+
+# Application Configuration
+APP_ENV=development
+APP_DEBUG=true
+APP_URL=http://localhost
 ```
+
+### Environment Variable Usage
+
+The application automatically loads environment variables from the `.env` file. The `components/_dbconnect.php` file uses these variables to establish database connections:
+
+- **Local Development**: Uses `.env` file variables
+- **Docker Environment**: Uses environment variables from docker-compose.yml
+- **Production**: Uses server environment variables
+
+### Security Best Practices
+
+1. **Never commit .env file** - Add `.env` to `.gitignore`
+2. **Use strong passwords** - Generate secure database and SMTP passwords
+3. **Restrict file permissions** - Set `.env` file permissions to 600
+4. **Environment-specific configs** - Use different .env files for dev/staging/prod
 
 ### Security Settings
 
@@ -205,7 +252,92 @@ grep -r "eval\|exec\|system" --include="*.php" .
 - [ ] Configure error logging
 - [ ] Set up automated backups
 - [ ] Configure caching (Redis/Memcached)
-- [ ] Set up monitoring (New Relic/DataDog)
+- [ ] Set up monitoring (New Relic/DataDogI will now update the README.md file to include instructions about the .env file and reflect the environment variable usage in the project.
+
+<edit_file>
+<path>README.md</path>
+<content>
+<<<<<<< SEARCH
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+DB_HOST=localhost
+DB_NAME=threadhub
+DB_USER=root
+DB_PASS=password
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
+```
+
+### Security Settings
+
+- Enable HTTPS in production
+- Set secure session parameters
+- Configure proper file permissions
+- Regular security updates
+=======
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env` file in the root directory with the following content and update the values as needed:
+
+```env
+# Database Configuration
+DB_HOST=localhost
+DB_NAME=threadhub
+DB_USER=root
+DB_PASS=your_database_password
+
+# SMTP Configuration for Email
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
+
+# Application Configuration
+APP_ENV=development
+APP_DEBUG=true
+APP_URL=http://localhost
+
+# Security Configuration
+SESSION_SECURE=false
+SESSION_HTTP_ONLY=true
+SESSION_SAMESITE=Lax
+
+# Optional: Redis Configuration (for caching)
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_PASSWORD=
+
+# Optional: File Upload Configuration
+MAX_FILE_SIZE=5242880
+ALLOWED_FILE_TYPES=jpg,jpeg,png,gif,pdf,doc,docx
+UPLOAD_PATH=uploads/
+
+# Optional: Social Login Configuration
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+FACEBOOK_APP_ID=
+FACEBOOK_APP_SECRET=
+```
+
+### Using Environment Variables with Docker
+
+The project supports Docker and docker-compose. Environment variables are set in the `docker-compose.yml` file for the web and database services. Ensure to update the `.env` file and `docker-compose.yml` accordingly to keep credentials consistent.
+
+### Security Settings
+
+- Enable HTTPS in production
+- Set secure session parameters
+- Configure proper file permissions
+- Regular security updates
 
 ### Docker Deployment
 
@@ -218,37 +350,105 @@ EXPOSE 80
 
 ### How to Run the Project in Docker Container
 
-1. Build the Docker image:
+#### Quick Start with Docker Compose
 
+1. **Start the entire stack**
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Access the services**
+   - Main application: http://localhost:8080
+   - PHPMyAdmin: http://localhost:8081
+   - MySQL: localhost:3306
+
+3. **Stop the services**
+   ```bash
+   docker-compose down
+   ```
+
+#### Manual Docker Commands
+
+1. **Build the Docker image**
+   ```bash
+   docker build -t threadhub-forum .
+   ```
+
+2. **Run with environment variables**
+   ```bash
+   docker run -d -p 8080:80 \
+     -e DB_HOST=your-db-host \
+     -e DB_NAME=threadhub \
+     -e DB_USER=root \
+     -e DB_PASSWORD=your-password \
+     --name threadhub-container threadhub-forum
+   ```
+
+3. **Access the application**
+   ```
+   http://localhost:8080
+   ```
+
+### Environment Variables in Docker
+
+The Docker setup uses environment variables defined in `docker-compose.yml`:
+
+```yaml
+environment:
+  - DB_HOST=db
+  - DB_NAME=threadhub
+  - DB_USER=root
+  - DB_PASSWORD=rootpassword
+```
+
+### Development vs Production
+
+#### Development (.env file)
+```env
+APP_ENV=development
+APP_DEBUG=true
+DB_HOST=localhost
+```
+
+#### Production (server environment)
 ```bash
-docker build -t threadhub-forum .
+export APP_ENV=production
+export APP_DEBUG=false
+export DB_HOST=your-production-db-host
 ```
 
-2. Run the Docker container:
+### Troubleshooting
 
-```bash
-docker run -d -p 8080:80 --name threadhub-container threadhub-forum
-```
+#### Common Issues
 
-3. Access the application in your browser at:
+1. **Database Connection Failed**
+   - Check if MySQL is running
+   - Verify credentials in .env file
+   - Ensure database exists
 
-```
-http://localhost:8080
-```
+2. **SMTP Email Not Working**
+   - Check SMTP credentials in .env
+   - Verify email provider settings
+   - Check firewall settings
 
-4. To stop the container:
+3. **Permission Issues**
+   ```bash
+   # Fix file permissions
+   sudo chown -R www-data:www-data /var/www/html
+   sudo chmod -R 755 /var/www/html
+   sudo chmod 600 .env
+   ```
 
-```bash
-docker stop threadhub-container
-```
-
-5. To remove the container:
-
-```bash
-docker rm threadhub-container
-```
-
-Make sure your database is accessible to the container, either by running a separate MySQL container or connecting to an external database. Update your database credentials accordingly in the configuration files.
+4. **Docker Issues**
+   ```bash
+   # Check container logs
+   docker-compose logs web
+   docker-compose logs db
+   
+   # Rebuild containers
+   docker-compose down
+   docker-compose up --build
+   ```
 docker rm threadhub-container
 3. Access the application in your browser at:
 
