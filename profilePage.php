@@ -127,7 +127,7 @@ $userid = $_GET['user_id'];
                     ?>
                 </div>
 
-
+                <?php
                 // HANDLING EDIT ABOUT CONTENT PHP FORM SUBMISSION
                 // --------------------------------------------------
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save'])) {
