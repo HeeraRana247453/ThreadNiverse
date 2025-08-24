@@ -160,8 +160,6 @@ $userid = $_GET['user_id'];
                 }
             </script>
 
-</div>
-
 <!-- SIDE PART IN THE LAYOUT
  ================================================================ -->
         <div class="sidepart">
@@ -252,6 +250,8 @@ $userid = $_GET['user_id'];
             }
             ?>
         </div>
+</div>
+
 
     </div>
     <?php include "components/_footer.php" ?>
